@@ -27,7 +27,6 @@ public class FileStorageService {
 
     public FileModel storeFile(MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         try {
@@ -35,7 +34,7 @@ public class FileStorageService {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
             String name = fileName.split("\\.")[0];
-            FileModel fileModel = new FileModel(fileName, file.getContentType(), file.getBytes(), timestamp);
+            FileModel fileModel = new FileModel(name, file.getContentType(), file.getBytes(), timestamp);
 
             return fileRepository.save(fileModel);
         } catch (IOException ex) {

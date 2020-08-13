@@ -29,12 +29,9 @@ public class FileController {
 //                .path("/downloadFile/")
 //                .path(fileModel.getId())
 //                .toUriString();
-
         fileStorageService.storeFile(file);
-
-//        return new UploadFileResponse(file.getOriginalFilename(), null,
-//                file.getContentType(), file.getSize());
-    return null;
+        return new UploadFileResponse(file.getOriginalFilename(), null,
+                file.getContentType(), file.getSize());
     }
 
 //    @PostMapping("/uploadMultipleFiles")
