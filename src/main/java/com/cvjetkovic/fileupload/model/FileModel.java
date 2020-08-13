@@ -3,6 +3,7 @@ package com.cvjetkovic.fileupload.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 /**
  * @author Vladimir Cvjetkovic
@@ -26,14 +27,18 @@ public class FileModel {
     @Column(name = "data")
     private byte[] data;
 
+    @Column(name = "timestamp")
+    private Timestamp timestamp;
+
     public FileModel() {
 
     }
 
-    public FileModel(String filename, String fileType, byte[] data) {
+    public FileModel(String filename, String fileType, byte[] data, Timestamp timestamp) {
         this.filename = filename;
         this.fileType = fileType;
         this.data = data;
+        this.timestamp = timestamp;
     }
 
     public String getId() {
@@ -66,5 +71,13 @@ public class FileModel {
 
     public void setData(byte[] data) {
         this.data = data;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 }

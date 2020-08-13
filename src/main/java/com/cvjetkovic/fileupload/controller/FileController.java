@@ -30,10 +30,11 @@ public class FileController {
 //                .path(fileModel.getId())
 //                .toUriString();
 
-//        fileStorageService.storeFile(file);
+        fileStorageService.storeFile(file);
 
-        return new UploadFileResponse(file.getOriginalFilename(), null,
-                file.getContentType(), file.getSize());
+//        return new UploadFileResponse(file.getOriginalFilename(), null,
+//                file.getContentType(), file.getSize());
+    return null;
     }
 
 //    @PostMapping("/uploadMultipleFiles")

@@ -10,6 +10,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 /**
  * @author Vladimir Cvjetkovic
@@ -20,15 +23,19 @@ public class FileStorageService {
     @Autowired
     private FileRepository fileRepository;
 
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+
     public FileModel storeFile(MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         try {
             if (fileName.contains("..")) {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
             String name = fileName.split("\\.")[0];
-            FileModel fileModel = new FileModel(fileName, file.getContentType(), file.getBytes());
+            FileModel fileModel = new FileModel(fileName, file.getContentType(), file.getBytes(), timestamp);
 
             return fileRepository.save(fileModel);
         } catch (IOException ex) {
