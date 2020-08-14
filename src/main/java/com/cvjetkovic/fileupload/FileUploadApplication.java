@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.MultipartFilter;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,6 +39,7 @@ public class FileUploadApplication extends SpringBootServletInitializer {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
+
 
     public static void main(String[] args) {
         SpringApplication.run(FileUploadApplication.class, args);
