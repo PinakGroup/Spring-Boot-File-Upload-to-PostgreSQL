@@ -3,54 +3,54 @@ package com.cvjetkovic.fileupload.fileops;
 import java.io.ByteArrayOutputStream;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
-
+/**
+ * @author Vladimir Cvjetkovic
+ */
 public class ByteArrayCompressDecompress {
 
     public byte[] compressByteArray(byte[] bytes) {
-        ByteArrayOutputStream baos = null;
-        Deflater dfl = new Deflater();
-        dfl.setLevel(Deflater.BEST_COMPRESSION);
-        dfl.setInput(bytes);
-        dfl.finish();
-        baos = new ByteArrayOutputStream();
+        ByteArrayOutputStream byteArrayOutputStream = null;
+        Deflater deflater = new Deflater();
+        deflater.setLevel(Deflater.BEST_COMPRESSION);
+        deflater.setInput(bytes);
+        deflater.finish();
+        byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] tmp = new byte[4 * 1024];
         try {
-            while (!dfl.finished()) {
-                int size = dfl.deflate(tmp);
-                baos.write(tmp, 0, size);
+            while (!deflater.finished()) {
+                int size = deflater.deflate(tmp);
+                byteArrayOutputStream.write(tmp, 0, size);
             }
         } catch (Exception ex) {
 
         } finally {
             try {
-                if (baos != null) baos.close();
+                if (byteArrayOutputStream != null) byteArrayOutputStream.close();
             } catch (Exception ex) {
             }
         }
-
-        return baos.toByteArray();
+        return byteArrayOutputStream.toByteArray();
     }
 
     public byte[] decompressByteArray(byte[] bytes) {
-        ByteArrayOutputStream baos = null;
-        Inflater iflr = new Inflater();
-        iflr.setInput(bytes);
-        baos = new ByteArrayOutputStream();
+        ByteArrayOutputStream byteArrayOutputStream = null;
+        Inflater inflater = new Inflater();
+        inflater.setInput(bytes);
+        byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] tmp = new byte[4 * 1024];
         try {
-            while (!iflr.finished()) {
-                int size = iflr.inflate(tmp);
-                baos.write(tmp, 0, size);
+            while (!inflater.finished()) {
+                int size = inflater.inflate(tmp);
+                byteArrayOutputStream.write(tmp, 0, size);
             }
         } catch (Exception ex) {
 
         } finally {
             try {
-                if (baos != null) baos.close();
+                if (byteArrayOutputStream != null) byteArrayOutputStream.close();
             } catch (Exception ex) {
             }
         }
-
-        return baos.toByteArray();
+        return byteArrayOutputStream.toByteArray();
     }
 }
