@@ -1,5 +1,7 @@
 package com.cvjetkovic.fileupload.payload;
 
+import com.cvjetkovic.fileupload.model.PreviewFileModel;
+
 import java.util.List;
 
 /**

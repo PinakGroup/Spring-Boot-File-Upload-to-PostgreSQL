@@ -3,7 +3,7 @@ package com.cvjetkovic.fileupload.controller;
 import com.cvjetkovic.fileupload.model.FileModel;
 import com.cvjetkovic.fileupload.payload.AllFilesResponse;
 import com.cvjetkovic.fileupload.payload.UploadFileResponse;
-import com.cvjetkovic.fileupload.service.FileStorageService;
+import com.cvjetkovic.fileupload.service.FileStorageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -21,11 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileController {
 
     @Autowired
-    private FileStorageService fileStorageService;
+    private FileStorageServiceImpl fileStorageServiceImpl;
 
     @GetMapping("/allFiles")
     public AllFilesResponse listAllFiles(){
-        return fileStorageService.getAllFiles();
+        return fileStorageServiceImpl.listAllFiles();
     }
 
     @PostMapping("/uploadFile")
@@ -35,7 +35,7 @@ public class FileController {
 //                .path("/downloadFile/")
 //                .path(fileModel.getId())
 //                .toUriString();
-        fileStorageService.storeFile(file);
+        fileStorageServiceImpl.storeFile(file);
         return new UploadFileResponse(file.getOriginalFilename(), null,
                 file.getContentType(), file.getSize());
     }
@@ -50,7 +50,7 @@ public class FileController {
 
     @GetMapping("/downloadFile/{fileId}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileId, String fileType) {
-        FileModel fileModel = fileStorageService.getFile(fileId);
+        FileModel fileModel = fileStorageServiceImpl.getFile(fileId);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(fileModel.getFileType()))
@@ -60,7 +60,7 @@ public class FileController {
 
     @DeleteMapping("/delete/{fileId}")
     public String deleteFile(@PathVariable String fileId) {
-        fileStorageService.deleteFile(fileId);
+        fileStorageServiceImpl.deleteFile(fileId);
         return "File deleted: " + fileId;
     }
 }
