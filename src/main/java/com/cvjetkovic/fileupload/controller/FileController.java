@@ -1,6 +1,7 @@
 package com.cvjetkovic.fileupload.controller;
 
 import com.cvjetkovic.fileupload.model.FileModel;
+import com.cvjetkovic.fileupload.payload.AllFilesResponse;
 import com.cvjetkovic.fileupload.payload.UploadFileResponse;
 import com.cvjetkovic.fileupload.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class FileController {
 
     @Autowired
     private FileStorageService fileStorageService;
+
+    @GetMapping("/allFiles")
+    public AllFilesResponse listAllFiles(){
+        return fileStorageService.getAllFiles();
+    }
 
     @PostMapping("/uploadFile")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
