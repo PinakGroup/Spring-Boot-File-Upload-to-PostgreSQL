@@ -4,7 +4,7 @@ import com.cvjetkovic.fileupload.exception.FileStorageException;
 import com.cvjetkovic.fileupload.exception.MyFileNotFoundException;
 import com.cvjetkovic.fileupload.model.FileModel;
 import com.cvjetkovic.fileupload.payload.AllFilesResponse;
-import com.cvjetkovic.fileupload.payload.DownloadFileResponse;
+import com.cvjetkovic.fileupload.payload.PreviewFileModel;
 import com.cvjetkovic.fileupload.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,16 +30,16 @@ public class FileStorageService {
 
     public AllFilesResponse getAllFiles() {
         List<FileModel> files = fileRepository.findAll();
-        List<DownloadFileResponse> returnValue = new ArrayList<>();
+        List<PreviewFileModel> returnValue = new ArrayList<>();
         AllFilesResponse allFilesResponse = new AllFilesResponse();
 
         for (FileModel fileFromRepo : files) {
-            DownloadFileResponse downloadFileResponse = new DownloadFileResponse();
-            downloadFileResponse.setId(fileFromRepo.getId());
-            downloadFileResponse.setFileName(fileFromRepo.getFilename());
-            downloadFileResponse.setFileType(fileFromRepo.getFileType());
-            downloadFileResponse.setSize(fileFromRepo.getData().length);
-            returnValue.add(downloadFileResponse);
+            PreviewFileModel previewFileModel = new PreviewFileModel();
+            previewFileModel.setId(fileFromRepo.getId());
+            previewFileModel.setFileName(fileFromRepo.getFilename());
+            previewFileModel.setFileType(fileFromRepo.getFileType());
+            previewFileModel.setSize(fileFromRepo.getData().length);
+            returnValue.add(previewFileModel);
         }
         allFilesResponse.setAllFiles(returnValue);
         return allFilesResponse;

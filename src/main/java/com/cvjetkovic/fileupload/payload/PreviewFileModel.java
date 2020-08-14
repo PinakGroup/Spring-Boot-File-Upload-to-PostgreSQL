@@ -2,16 +2,16 @@ package com.cvjetkovic.fileupload.payload;
 /**
  * @author Vladimir Cvjetkovic
  */
-public class DownloadFileResponse {
+public class PreviewFileModel {
 
     private String id;
     private String fileName;
     private String fileType;
     private long size;
 
-    public DownloadFileResponse(){}
+    public PreviewFileModel(){}
 
-    public DownloadFileResponse(String id, String fileName, String fileType, long size) {
+    public PreviewFileModel(String id, String fileName, String fileType, long size) {
         this.id = id;
         this.fileName = fileName;
         this.fileType = fileType;

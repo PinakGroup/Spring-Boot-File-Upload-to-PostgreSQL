@@ -1,7 +1,5 @@
 package com.cvjetkovic.fileupload.payload;
 
-import com.cvjetkovic.fileupload.model.FileModel;
-
 import java.util.List;
 
 /**
@@ -9,19 +7,19 @@ import java.util.List;
  */
 public class AllFilesResponse {
 
-    private List<DownloadFileResponse> allFiles;
+    private List<PreviewFileModel> allFiles;
 
     public AllFilesResponse(){}
 
-    public AllFilesResponse(List<DownloadFileResponse> allFiles) {
+    public AllFilesResponse(List<PreviewFileModel> allFiles) {
         this.allFiles = allFiles;
     }
 
-    public List<DownloadFileResponse> getAllFiles() {
+    public List<PreviewFileModel> getAllFiles() {
         return allFiles;
     }
 
-    public void setAllFiles(List<DownloadFileResponse> allFiles) {
+    public void setAllFiles(List<PreviewFileModel> allFiles) {
         this.allFiles = allFiles;
     }
 }
